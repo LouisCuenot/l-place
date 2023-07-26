@@ -1,0 +1,16 @@
+.Logout{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    .logoutButton{
+        width: fit-content;
+        height: fit-content;
+        background-color: orange;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #FFFFFF;
+        margin-right: 30px;
+    }
+}
