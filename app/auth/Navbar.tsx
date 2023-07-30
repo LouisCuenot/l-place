@@ -1,5 +1,5 @@
 import React from 'react'
-import { getServerSession } from 'next-auth'
+import { getServerSession,  } from 'next-auth'
 import './css/Navbar.scss'
 import Link from 'next/link'
 import SignIn from './SignIn'

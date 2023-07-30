@@ -1,0 +1,23 @@
+#pixelGrid{
+    border-radius: 15px;
+    background-color: #ffffff;
+    padding: 30px;
+    margin-right: 50px;
+    display: grid;
+    grid-template-columns: repeat(50, 1fr);
+    grid-template-rows: repeat(50, 1fr);
+    .pixel{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+        border-right: 1px solid rgba(0, 0, 0, 0.6); 
+        .pixelInfos{
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            border: 2px solid rgba(0, 0, 0, 0.6);
+            border-radius: 7px;
+            background-color: #ffffff;
+        }
+    }
+}
