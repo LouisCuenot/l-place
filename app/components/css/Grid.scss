@@ -19,5 +19,11 @@
             border-radius: 7px;
             background-color: #ffffff;
         }
+        &.rubberActive{
+            cursor: cell;
+            &:hover{
+                background-color: #FFA500 !important;
+            }
+        }
     }
 }

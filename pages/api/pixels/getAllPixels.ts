@@ -16,11 +16,9 @@ export default async function handler(
                     createdAt:"desc"
                 }
             })
-            console.log(result)
             res.status(200).json(result)
         }catch(error){
             res.status(403).json({message:"An error occured while getting pixels"})
-            console.log(error)
         }
     }
 }

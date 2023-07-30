@@ -20,7 +20,7 @@ const Pixel = (props:{
 
     const queryClient = useQueryClient()
 
-    const { mutate } = useMutation(
+    const editPixel = useMutation(
       async (color:string) => {
         return axios.post(
             "/api/pixels/editPixel",
@@ -33,7 +33,22 @@ const Pixel = (props:{
       {
         onSuccess:(data)=>{
           queryClient.invalidateQueries(["allPixels"])
-          console.log('yo')
+        }
+      }
+    )
+
+    const eraseEdit = useMutation(
+      async () => {
+        return axios.post(
+          "/api/pixels/erasePixelEdit",
+          {
+            pixelId:pixel.id
+          }
+        )
+      },
+      {
+        onSuccess:(data)=>{
+          queryClient.invalidateQueries(["allPixels"])
         }
       }
     )
@@ -41,19 +56,25 @@ const Pixel = (props:{
 
   return (
     <div
-        className={`pixel ${isHovered ? 'pixelHovered' : ''}`}
+        className={`pixel ${isHovered ? 'pixelHovered' : ''} ${currentTool === 'rubber' ? 'rubberActive' : ''}`}
         onMouseEnter={()=>setIsHovered(true)}
         onMouseLeave={()=>setIsHovered(false)}
         style={{
             borderLeft: pixel.column === 1 ? '1px solid rgba(0, 0, 0, 0.6)' : '',
             borderTop:pixel.row === 1 ? '1px solid rgba(0, 0, 0, 0.6)' : '',
-            backgroundColor: currentTool === 'pencil' ? isHovered ? pickedColor : pixel.currentColor : pixel.currentColor,
+            backgroundColor: currentTool === 'pencil' ? isHovered ? pickedColor : pixel.edits.length ? pixel.edits[pixel.edits.length-1].color : pixel.currentColor : pixel.edits.length ? pixel.edits[pixel.edits.length-1].color : pixel.currentColor,
             gridArea:`${pixel.row} / ${pixel.column} / ${pixel.row+1} / ${pixel.column+1}`
         }}
         ref={pixelRef}
         onClick={()=>{
           if(currentTool === 'pencil'){
-            mutate(pickedColor)
+            editPixel.mutate(pickedColor)
+          }
+          if(currentTool === 'history'){
+
+          }
+          if(currentTool === 'rubber'){
+            eraseEdit.mutate()
           }
         }}
     >

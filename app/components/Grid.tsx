@@ -45,8 +45,6 @@ const Grid = () => {
     return <div>Loading pixels...</div>
   }
 
-  console.log(data)
-
   
 
   

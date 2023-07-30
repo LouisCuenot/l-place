@@ -36,6 +36,7 @@ const Sidebar = () => {
         <ToolButton tool='cursor'/>
         <ToolButton tool='pencil'/>
         <ToolButton tool='rubber'/>
+        <ToolButton tool='history'/>
         <ColorButton color='#FF0000'/>
         <ColorButton color='#00FF00'/>
         <ColorButton color='#0000FF'/>
