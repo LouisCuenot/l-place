@@ -1,0 +1,14 @@
+.pixelHistory{
+    width: 90%;
+    padding-top: 30px;
+    .edit{
+        width: 100%;
+        height: fit-content;
+        padding: 20px;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        border-radius: 7px;
+        margin-bottom: 20px;
+    }
+}

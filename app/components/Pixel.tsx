@@ -1,10 +1,12 @@
 'use client'
 
+import {useRouter} from 'next/navigation'
 import React, { useRef, useState } from 'react'
 import { PixelType } from '../types/pixelType'
 import { useToolsContext } from '../providers/ToolsProvider'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const Pixel = (props:{
     pixel:PixelType
@@ -14,6 +16,8 @@ const Pixel = (props:{
 
     const { pickedColor, currentTool } = useToolsContext()
 
+    const router = useRouter()
+
     const [isHovered, setIsHovered] = useState(false)
 
     const pixelRef = useRef<HTMLDivElement>(null!)
@@ -22,41 +26,57 @@ const Pixel = (props:{
 
     const editPixel = useMutation(
       async (color:string) => {
-        return axios.post(
+        const editPromise =  axios.post(
             "/api/pixels/editPixel",
             {
               color:color,
               pixelId:pixel.id
             }
         )
-      },
-      {
-        onSuccess:(data)=>{
-          queryClient.invalidateQueries(["allPixels"])
-        }
+        toast.promise(
+          editPromise,
+          {
+            loading:'editing pixel...',
+            error:(err)=>{
+              return err.response.data.message
+            },
+            success:(data)=>{
+              queryClient.invalidateQueries(["allPixels"])
+              return "Pixel has been edited !"
+            }
+          }
+        )
       }
     )
 
     const eraseEdit = useMutation(
       async () => {
-        return axios.post(
+        const deletePromise =  axios.post(
           "/api/pixels/erasePixelEdit",
           {
             pixelId:pixel.id
           }
         )
-      },
-      {
-        onSuccess:(data)=>{
-          queryClient.invalidateQueries(["allPixels"])
-        }
+        toast.promise(
+          deletePromise,
+          {
+            loading:'editing pixel...',
+            error:(err)=>{
+              return err.response.data.message
+            },
+            success:(data)=>{
+              queryClient.invalidateQueries(["allPixels"])
+              return "Last edit has been deleted"
+            }
+          }
+        )
       }
     )
 
 
   return (
     <div
-        className={`pixel ${isHovered ? 'pixelHovered' : ''} ${currentTool === 'rubber' ? 'rubberActive' : ''}`}
+        className={`pixel ${isHovered ? 'pixelHovered' : ''} ${currentTool === 'rubber' ? 'rubberActive' : ''} ${currentTool === 'history' ? 'historyActive' : ''}`}
         onMouseEnter={()=>setIsHovered(true)}
         onMouseLeave={()=>setIsHovered(false)}
         style={{
@@ -71,7 +91,7 @@ const Pixel = (props:{
             editPixel.mutate(pickedColor)
           }
           if(currentTool === 'history'){
-
+            router.push(`/pixelHistory/${pixel.id}`)
           }
           if(currentTool === 'rubber'){
             eraseEdit.mutate()

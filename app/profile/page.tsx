@@ -46,6 +46,9 @@ const page = () => {
                 </div>
             ))
         }
+        {
+                !data![0] && <span>This pixel don't have any edit</span>
+        }
     </div>
   )
 }

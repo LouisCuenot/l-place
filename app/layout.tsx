@@ -3,6 +3,7 @@ import Navbar from './auth/Navbar'
 import QueryWrapper from './auth/QueryWrapper'
 import './globals.css'
 import { ToolsContext } from './providers/ToolsProvider'
+import { Toaster } from 'react-hot-toast'
 
 export default function RootLayout({
   children,
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body>
           <QueryWrapper>
             <Navbar/>
+            <Toaster/>
             {children}
           </QueryWrapper>
       </body>

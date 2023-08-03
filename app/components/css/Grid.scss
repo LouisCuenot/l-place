@@ -25,5 +25,11 @@
                 background-color: #FFA500 !important;
             }
         }
+        &.historyActive{
+            cursor: help;
+            &:hover{
+                background-color: #FFA500 !important;
+            }
+        }
     }
 }

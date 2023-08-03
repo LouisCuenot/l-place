@@ -5,6 +5,10 @@ import './css/Sidebar.scss'
 import ResetPixels from './sidebarComponents/ResetPixels'
 import ToolButton from './sidebarComponents/ToolButton'
 import ColorButton from './sidebarComponents/ColorButton'
+import Pen from './sidebarComponents/img/pen.png'
+import Rubber from './sidebarComponents/img/rubber.png'
+import Cursor from './sidebarComponents/img/cursor.png'
+import History from './sidebarComponents/img/history.png'
 
 const Sidebar = () => {
 
@@ -33,10 +37,10 @@ const Sidebar = () => {
       }}
     >
       <div className="sidebarContent">
-        <ToolButton tool='cursor'/>
-        <ToolButton tool='pencil'/>
-        <ToolButton tool='rubber'/>
-        <ToolButton tool='history'/>
+        <ToolButton tool='cursor' imgSrc={Cursor}/>
+        <ToolButton tool='pencil' imgSrc={Pen}/>
+        <ToolButton tool='rubber' imgSrc={Rubber}/>
+        <ToolButton tool='history' imgSrc={History}/>
         <ColorButton color='#FF0000'/>
         <ColorButton color='#00FF00'/>
         <ColorButton color='#0000FF'/>
